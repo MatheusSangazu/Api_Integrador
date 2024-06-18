@@ -11,8 +11,9 @@ app.use(express.json());
 // Usar as rotas
 app.use('/', indexRouter);
 app.use('/api', budgetsRouter);  // Todas as rotas de API começarão com /api
-const cors = require('cors');
-const morgan = require('morgan');
+
+const cors = require('cors'); // Middleware para CORS -> Permite que eu rode o back e front no mesmo pc
+const morgan = require('morgan');// Middleware para log de solicitações
 
 app.use(cors());
 app.use(morgan('dev'));

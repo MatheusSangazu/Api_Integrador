@@ -1,5 +1,5 @@
 const axios = require('axios');
-const { clientId, clientSecret, clinicToken, apiBaseUrl } = require('../config/config');
+const { clientId, clientSecret, clinicToken, apiBaseUrl, pipedriveApiKey } = require('../config/config');
 
 
 
@@ -19,7 +19,18 @@ const getBudgets = async () => {
     }
 };
 
+
+
+
+
+
+
+
+
 module.exports = {
-    getBudgets
+    getBudgets,
+    
 };
-// /orcamento/lista/?dataFinal={{formatDate(now; "yyyy-MM-DD")}}&dataInicial={{formatDate(now; "yyyy-MM-DD")}}&tipoData=APROVACAO
+
+
+

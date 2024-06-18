@@ -4,5 +4,6 @@ module.exports = {
     clientId: process.env.CLIENT_ID,
     clientSecret: process.env.CLIENT_SECRET,
     clinicToken: process.env.CLINIC_TOKEN,
-    apiBaseUrl: process.env.API_BASE_URL
+    apiBaseUrl: process.env.API_BASE_URL,
+    pipedriveApiKey: process.env.PIPEDRIVE_API_KEY 
 };
