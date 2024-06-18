@@ -1,4 +1,5 @@
-const { getBudgets } = require('../services/apiService');
+const { getBudgets, getSubscribers} = require('../services/apiService');
+
 
 // Controlador para obter orçamentos
 const fetchBudgets = async (req, res) => {
@@ -41,7 +42,7 @@ const fetchAndOrganizeBudgets = async (req, res) => {
       nome: budget.pessoaResponsavel.nome,
       cpf: budget.pessoaResponsavel.cpfcnpj,
       email: budget.paciente.email
-      
+
 
     }));
 
@@ -57,10 +58,30 @@ const fetchAndOrganizeBudgets = async (req, res) => {
 
 
 
+// Controlador para obter dados dos inscritos
+const fetchSubscribers = async (req, res) => {
+  try {
+    const data = await getSubscribers();
+    console.log('Dados retornados pela API do Bot Conversa:', JSON.stringify(data, null, 2));
+
+    if (Array.isArray(data)) {
+      const count = data.length; // Contar o número de inscritos na lista
+      console.log('Número de inscritos:', count);
+      return res.json({ count, subscribers: data });
+    } else {
+      console.error('Dados retornados não são uma lista:', data);
+      return res.status(500).json({ message: 'Dados retornados não são uma lista', data });
+    }
+  } catch (error) {
+    console.error('Erro ao obter dados dos inscritos do Bot Conversa:', error);
+    return res.status(500).json({ message: 'Erro ao obter dados dos inscritos do Bot Conversa', error: error.message });
+  }
+};
 
 
 
 module.exports = {
   fetchBudgets,
-  fetchAndOrganizeBudgets
+  fetchAndOrganizeBudgets,
+  fetchSubscribers
 };

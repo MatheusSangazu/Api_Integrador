@@ -1,5 +1,5 @@
 const axios = require('axios');
-const { clientId, clientSecret, clinicToken, apiBaseUrl, pipedriveApiKey } = require('../config/config');
+const { clientId, clientSecret, clinicToken, apiBaseUrl, pipedriveApiKey,tokenBotConversa, apiBotConversaBaseUrl  } = require('../config/config');
 
 
 
@@ -19,13 +19,26 @@ const getBudgets = async () => {
     }
 };
 
+const api = axios.create({
+    baseURL: apiBotConversaBaseUrl,
+    headers: {
+      'accept': 'application/json',
+      'API-KEY': tokenBotConversa,
+      'Content-Type': 'application/json'
+    }
+  });
 
 
-
-
-
-
-
+  // Função para obter dados dos inscritos (subscribers)
+const getSubscribers = async () => {
+    try {
+      const response = await api.get('subscribers/');
+      return response.data;
+    } catch (error) {
+      console.error('Erro ao obter dados dos inscritos do Bot Conversa:', error);
+      throw error;
+    }
+  };
 
 
 
@@ -36,6 +49,7 @@ const getBudgets = async () => {
 
 module.exports = {
     getBudgets,
+    getSubscribers
     
 };
 
